@@ -124,6 +124,7 @@ export function createAppAPI<HostElement>(
   render: RootRenderFunction,
   hydrate?: RootHydrateFunction
 ): CreateAppFunction<HostElement> {
+  // 返回一个app对象
   return function createApp(rootComponent, rootProps = null) {
     if (rootProps != null && !isObject(rootProps)) {
       __DEV__ && warn(`root props passed to app.mount() must be an object.`)
@@ -226,6 +227,7 @@ export function createAppAPI<HostElement>(
 
       mount(rootContainer: HostElement, isHydrate?: boolean): any {
         if (!isMounted) {
+          //创建根vnode
           const vnode = createVNode(
             rootComponent as ConcreteComponent,
             rootProps
@@ -244,6 +246,7 @@ export function createAppAPI<HostElement>(
           if (isHydrate && hydrate) {
             hydrate(vnode as VNode<Node, Element>, rootContainer as any)
           } else {
+            // 利用渲染器渲染vnode
             render(vnode, rootContainer)
           }
           isMounted = true

@@ -267,6 +267,7 @@ export function isSameVNodeType(n1: VNode, n2: VNode): boolean {
     // HMR only: if the component has been hot-updated, force a reload.
     return false
   }
+  // 节点的type和key都相同才同一个节点
   return n1.type === n2.type && n1.key === n2.key
 }
 
@@ -346,6 +347,7 @@ function _createVNode(
   }
 
   // class & style normalization.
+  // 处理props 标准化class和style
   if (props) {
     // for reactive or proxy objects, we need to clone it to enable mutation.
     if (isProxy(props) || InternalObjectKey in props) {

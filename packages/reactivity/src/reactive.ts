@@ -190,6 +190,7 @@ function createReactiveObject(
     return existingProxy
   }
   // only a whitelist of value types can be observed.
+  // 只有在白名单里的数据类型才能变成响应式
   const targetType = getTargetType(target)
   if (targetType === TargetType.INVALID) {
     return target
