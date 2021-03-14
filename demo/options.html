@@ -12,6 +12,37 @@
 <body>
   <div id="app"></div>
   <script>
+//-------------start------------》
+
+const RulesPlugin = {
+  install(Vue){
+    Vue.mixin({
+      created(){
+        if(this.$optins.rules){
+          Object.keys(this.$optins.rules).forEach((key)=>{ 
+            //对象
+            const rule = this.$optins.rules[key]
+            this.$watch(key,(newValue)=>{
+              const result =  rule.validay(newValue)
+              if(!result){
+                //如果校验失败
+                console.log(rule.message)
+              }
+            })
+          })
+        }
+      }
+    })
+  }
+}
+
+// rules:{
+//   fool:{
+//     validay:(value)=> value>1,
+//     message:'jidieidnwi'
+//   }
+// }
+//-------------end------------》
     const {
       createApp,
       reactive,
@@ -41,6 +72,8 @@
         }
       }
     }
+
+
     createApp(MyComponent).mount('#app')
   </script>
 </body>
